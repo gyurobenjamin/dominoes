@@ -9,4 +9,4 @@ require __DIR__ . '/vendor/autoload.php';
 use Dominoes\Game;
 
 $game = new Game();
-// $game->runGame();
+$game->run();

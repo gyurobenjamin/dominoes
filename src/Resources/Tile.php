@@ -1,21 +1,21 @@
 <?php
-namespace Dominoes;
+namespace Dominoes\Resources;
 
-/**
- * Tile represents 
- */
 class Tile
 {
     private $next;
     private $ends = [];
 
+    /**
+     * @return array
+     */
     public function getEnds() : array
     {
         return $this->ends;
     }
 
     /**
-     * 
+     * @return Tile
      */
     public function getNext() : Tile
     {
@@ -23,9 +23,9 @@ class Tile
     }
 
     /**
-     * @return void
+     * @param $next
      */
-    public function setNext($next) : void
+    public function setNext(Tile $next) : void
     {
         $this->next = $next;
     }

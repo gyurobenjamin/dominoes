@@ -7,3 +7,6 @@ Dominos is a simple PHP based application.
 ```
 ./run
 ```
+
+## Used tools
+Composer

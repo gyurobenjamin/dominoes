@@ -1,10 +1,12 @@
 <?php
-namespace Dominoes;
+namespace Dominoes\Resources;
 
 /**
  * Player represents 
  */
 class Player
 {
+    private $next;
+
     
 }

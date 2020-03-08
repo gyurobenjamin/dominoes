@@ -1,8 +1,8 @@
 <?php
-namespace Dominoes;
+namespace Dominoes\Resources;
 
 /**
- * Stock represents 
+ * Stock represents a set of tiles
  */
 class Stock
 {

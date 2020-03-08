@@ -1,52 +1,32 @@
 <?php
-namespace Dominoes;
+namespace Dominos\Types;
 
-use Dominoes\Resources\Play;
-use Dominoes\Printer\Printer;
-
-/**
- * Dominoes represents
- */
-class Game
+class PrintLine
 {
-	private $play;
+    /**
+     * 
+     */
+    const GAME_START = "Game starting with first tile: <{NUM_1}:{NUM_2}>";
 
     /**
      * 
      */
-    public function __construct(array $confArr = []) {
-		$conf = new Config($confArr);
-
-		$this->play = new Play($conf);
-    }
+    const PLAYER_PLAY = "{NAME} plays <0:4> to connect to tile <4:1> on the board";
 
     /**
-     * Runs the game with all the neccesary steps from the first step to the winning step.
-	 * 
+     * 
      */
-    public function run() : void
-    {
-		// Printer::start();
-	}
+    const PLAYER_DRAW = "Alice plays <0:4> to connect to tile <4:1> on the board";
 
-	/**
-	 * Return true if the current player is out of tiles
-	 * 
-	 * @param Player $currentPlayer
-	 * @return bool
-	 */
-	private function checkEnd(Player $currentPlayer) : bool
-	{
-		$tiles = $currentPlayer->getTiles();
+    /**
+     * 
+     */
+    const LINE_STATUS = "Alice plays <0:4> to connect to tile <4:1> on the board";
 
-		// Player still has tiles, game continues
-		if (count($tiles) > 0) {
-			return false;
-		}
-
-		// Player has no tiles, winner found
-		return true;
-	}
+    /**
+     * 
+     */
+    const WIN_MESSAGE = "Alice plays <0:4> to connect to tile <4:1> on the board";
 }
 
 /*
