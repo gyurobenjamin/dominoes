@@ -6,8 +6,7 @@ if (php_sapi_name() !== 'cli') {
 
 require __DIR__ . '/vendor/autoload.php';
 
+use Dominoes\Game;
 
-use Cli\Exec;
-
-$app = new Exec();
-$app->runDominos();
+$game = new Game();
+// $game->runGame();

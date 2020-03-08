@@ -1,7 +1,8 @@
 {
+  "name": "gyurobenjamin/dominoes",
+  "description": "Simple Dominoes Game by Benjamin Gyuro",
   "autoload": {
     "psr-4": {
-      "Cli\\": "lib/",
       "Dominoes\\": "src/"
     }
   }
