@@ -87,6 +87,26 @@ docker build -t dominoes .
 docker run dominoes
 ```
 
+## Structure
+
+    .
+    ├── Dockerfile                  # Config file for docker
+    ├── README.md                   # Information about the project
+    ├── composer.json               # Config file for composer
+    ├── run                         # Unix script to run the app with PHP
+    ├── src                         # Source of the game
+    │   ├── Printer                 # Table of contents
+    │   ├── Resources               # Entities, objects
+    │   │   ├── Line.php            # Represents a list of tiles alias Board in the game
+    │   │   ├── Play.php            # Single play in the game from the shuffle to the end
+    │   │   ├── Player.php          # Represents a player
+    │   │   ├── PlayersGroup.php    # Set of all current players
+    │   │   ├── Stock.php           # List of tiles
+    │   │   └── Tile.php            # Single tile with two ends
+    │   ├── Config.php              # Parsing the config
+    │   └── Game.php                # Game wrapper
+    └── vendor                      # Vendor folder 
+
 ## TODO
 - Write tests
 - Check dependencies between object in Resources, might be good to decouple them with dependency inversion
