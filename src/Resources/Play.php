@@ -4,12 +4,29 @@ namespace Dominoes\Resources;
 use Dominoes\Config;
 
 /**
- * Play represents a single round in the game
+ * Play represents a single play.
  */
 class Play
 {
-    private $playersGroup;
+    /**
+     * Config $config
+     */
     private $config;
+
+    /**
+     * PlayersGroup $playersGroup
+     */
+    private $playersGroup;
+
+    /**
+     * Stock $stock unused tiles
+     */
+    private $stock;
+
+    /**
+     * Line $line used tiles in order
+     */
+    private $line;
 
     /**
      * 
@@ -21,7 +38,7 @@ class Play
     }
 
     /**
-	 * 
+	 * Generates all the players in a group
 	 */
 	private function generatePlayers() : void
 	{
@@ -29,5 +46,21 @@ class Play
             $this->config->numOfPlayers,
             $this->config->names,
         );
+    }
+
+    /**
+	 * Generates all the possible tiles in a stock
+	 */
+	private function generateStock() : void
+	{
+		$this->stock = new Stock();
+    }
+
+    /**
+	 * Init line
+	 */
+	private function initLine() : void
+	{
+		$this->line = new Line();
     }
 }

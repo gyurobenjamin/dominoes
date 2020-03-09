@@ -7,22 +7,22 @@ namespace Dominoes\Resources;
 class PlayersGroup
 {
     /**
-     * $first Player
+     * Player $first
      */
     private $first;
 
     /**
-     * $head Player
+     * Player $head
      */
     private $head;
 
     /**
-     * $names array
+     * array $names
      */
     private $availablePlayerNames = [];
 
     /**
-     * $numOfPlayers int
+     * int $numOfPlayers
      */
     private $numOfPlayers = 2;
 
@@ -31,10 +31,41 @@ class PlayersGroup
      * @param array $names
      */
     public function __construct(int $numOfPlayers, array $availablePlayerNames) {
-        $this->setNumOfPlayers($numOfPlayers);
         $this->setPlayerNames($availablePlayerNames);
+        $this->setNumOfPlayers($numOfPlayers);
 
-        print_r($this->availablePlayerNames);
+        $this->generatePlayers();
+    }
+
+    /**
+     * 
+     */
+    private function generatePlayers() : void
+    {
+        $indexes = array_rand($this->availablePlayerNames, $this->numOfPlayers);
+        
+        $firstIndex = $indexes[0];
+        $firstName = $this->availablePlayerNames[$firstIndex];
+
+        $firstPlayer = new Player();
+        $firstPlayer->setName($firstName);
+
+        $this->first = $firstPlayer;
+        $this->head = $this->first;
+
+        for ($i=1; $i < count($indexes); $i++) {
+            $curIndex = $indexes[$i];
+            $curName = $this->availablePlayerNames[$curIndex];
+
+            $curPlayer = new Player();
+            $curPlayer->setName($curName);
+            
+            $this->head->setNext($curPlayer);
+
+            $this->head = $this->head->getNext();
+        }
+
+        print_r($this->first->getName());
     }
 
     /**
