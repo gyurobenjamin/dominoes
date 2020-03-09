@@ -25,7 +25,16 @@ class Config
         'Pearl',
         'Isobel',
         'Amber',
-        'Gloria'
+        'Gloria',
+        'Nicolas',
+        'Evangeline',
+        'Ismail',
+        'Herbert',
+        'Alvin',
+        'Rufus',
+        'Lara',
+        'Willie',
+        'Umar',
     ];
 
     /**
@@ -36,8 +45,8 @@ class Config
             $this->names = $conf['names'];
         }
 
-        if (isset($conf['numberOfPlayers']) && \is_numeric($conf['numberOfPlayers'])) {
-            $this->numberOfPlayers = $conf['numberOfPlayers'];
+        if (isset($conf['numOfPlayers']) && \is_numeric($conf['numOfPlayers'])) {
+            $this->numOfPlayers = $conf['numOfPlayers'];
         }
     }
 }

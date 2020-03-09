@@ -8,5 +8,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 use Dominoes\Game;
 
-$game = new Game();
+$game = new Game([
+    "numOfPlayers" => 4,
+]);
 $game->run();
