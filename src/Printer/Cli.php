@@ -25,6 +25,8 @@ class Cli implements PrinterInterface
     static function start(string $tile) : void
     {
         $msg = "Game starting with first tile: <{$tile}>";
+
+        self::newLine();
         self::print($msg);
         self::newLine();
     }
@@ -45,9 +47,14 @@ class Cli implements PrinterInterface
 	/**
      * @param string $name
      */
-    static function draw(string $name, string $tile) : void
+    static function draw(string $name, string $tile, array $allTiles) : void
     {
-        $msg = "{$name} can't play, drawing tile $tile";
+        $msg = "{$name} can't play, drawing tile $tile. User tiles set:";
+
+        foreach($allTiles as $tile) {
+            $msg .= " <{$tile}>";
+        }
+
         self::print($msg);
         self::newLine();
 	}
@@ -74,6 +81,17 @@ class Cli implements PrinterInterface
 	{
         $msg = "Player {$name} has won!";
         self::print($msg);
+        self::newLine();
+        self::newLine();
+    }
+    
+    /**
+	 */
+	static function end() : void
+	{
+        $msg = "Not possible to finish the game!";
+        self::print($msg);
+        self::newLine();
         self::newLine();
 	}
 }

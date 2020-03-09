@@ -42,7 +42,7 @@ class Tile
      * 
      * @return Tile
      */
-    public function getNext() : Tile
+    public function getNext() : ?Tile
     {
         return $this->next;
     }
@@ -64,7 +64,19 @@ class Tile
      */
     public function toString() : string
     {
-        return "{$this->leftNum}:{$this->rightNum}";
+        if ($this->isPlaced()) {
+            return "{$this->leftNum}:{$this->rightNum}";
+        }
+
+        return "{$this->ends[0]}:{$this->ends[1]}";
+    }
+
+    /**
+     * @return int
+     */
+    public function getRightNum() : int
+    {
+        return $this->rightNum;
     }
 
     /**

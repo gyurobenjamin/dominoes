@@ -58,4 +58,69 @@ class Player
     {
         return $this->next;
     }
+
+    /**
+     * @return int
+     */
+    public function getNumOfTiles() : int
+    {
+        return count($this->tiles);
+    }
+
+    /**
+     * @return array
+     */
+    public function getTiles() : array
+    {
+        return $this->tiles;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTilesToStringArray() : array
+    {
+        $arr = [];
+
+        for ($i=0; $i < count($this->tiles); $i++) { 
+            $arr[] = $this->tiles[$i]->toString();
+        }
+
+        return $arr;
+    }
+
+    /**
+     * @param Tile $tile 
+     */
+    public function receiveTile(Tile $tile) : void
+    {
+        $this->tiles[] = $tile;
+    }
+
+    /**
+     * @param int $lastNum current last number in the line
+     */
+    public function pickTile(int $lastNum) : ?Tile
+    {
+        $tiles = $this->tiles;
+        $newTiles = [];
+        $ret = null;
+
+        for ($i=0; $i < $this->getNumOfTiles(); $i++) {
+            $ends = $tiles[$i]->getEnds();
+            if (
+                $ends[0] === $lastNum
+                || $ends[1] === $lastNum
+            ) {
+                $ret = $tiles[$i];
+                continue;
+            }
+
+            $newTiles[] = $this->tiles[$i];
+        }
+
+        $this->tiles = $newTiles;
+
+        return $ret;
+    }
 }

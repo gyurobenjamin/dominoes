@@ -113,7 +113,7 @@ class PlayersGroup
      * 
      * @return Player
      */
-    public function getNextPlayer() : Player
+    public function nextPlayer() : Player
     {
         $next = $this->curPlayer->getNext();
         

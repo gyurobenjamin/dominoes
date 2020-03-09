@@ -19,7 +19,7 @@ interface PrinterInterface
     /**
      * Player draws a tile
      */
-    static function draw(string $name, string $tile) : void;
+    static function draw(string $name, string $tile, array $allTiles) : void;
 
     /**
      * Print line (board) status
@@ -27,7 +27,12 @@ interface PrinterInterface
     static function line(array $tiles) : void;
 
     /**
-     * Print the final message with the
+     * Print the final message with the winner
      */
     static function win(string $name) : void;
+
+    /**
+     * Print the final equal message
+     */
+    static function end() : void;
 }

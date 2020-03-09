@@ -21,7 +21,7 @@ class Stock
     /**
      * @return Tile
      */
-    public function drawATile() : Tile
+    public function drawATile() : ?Tile
     {
         return array_pop($this->tiles);
     }
