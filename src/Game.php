@@ -23,7 +23,7 @@ class Game
      */
     public function run() : void
     {
-		// Printer::start();
+		$this->play->run();
 	}
 
 	/**

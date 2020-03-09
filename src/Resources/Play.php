@@ -33,8 +33,16 @@ class Play
      */
     public function __construct(Config $config) {
         $this->config = $config;
+    }
 
+    /**
+     * Runs the play
+     */
+    public function run() : void
+    {
         $this->generatePlayers();
+        $this->generateStock();
+        $this->initLine();
     }
 
     /**
@@ -53,7 +61,7 @@ class Play
 	 */
 	private function generateStock() : void
 	{
-		$this->stock = new Stock();
+        $this->stock = new Stock();
     }
 
     /**
@@ -61,6 +69,7 @@ class Play
 	 */
 	private function initLine() : void
 	{
-		$this->line = new Line();
+        $firstTile = $this->stock->drawATile();
+        $this->line = new Line($firstTile);
     }
 }

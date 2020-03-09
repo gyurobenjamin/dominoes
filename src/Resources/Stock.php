@@ -6,19 +6,48 @@ namespace Dominoes\Resources;
  */
 class Stock
 {
+    /**
+     * array $tiles
+     */
     private $tiles = [];
+
+    /**
+     * 
+     */
+    public function __construct() {
+        $this->generateTiles();
+    }
+
+    /**
+     * @return Tile
+     */
+    public function drawATile() : Tile
+    {
+        return array_pop($this->tiles);
+    }
 
     /**
      * This method will generate all the possible 28 tiles.
      */
-    private function generateTiles()
+    private function generateTiles() : void
     {
         $minNum = 0;
         $maxNum = 6;
-        for ($i=$minNum; $i < $maxNum; $j++) { 
-            for ($j=$minNum; $j < $maxNum; $j++) { 
-                $this->tiles[] = [$i,$j];
+        for ($i=$minNum; $i <= $maxNum; $i++) { 
+            for ($j=$minNum; $j <= $maxNum; $j++) { 
+                $this->tiles[] = new Tile([$i, $j]);
             }
         }
+
+        shuffle($this->tiles); // shuffle tiles
+    }
+
+    /**
+     * Counts the tiles in the stock
+     * @return int
+     */
+    public function getNumOfTiles() : int
+    {
+        return count($this->tiles);
     }
 }

@@ -54,7 +54,7 @@ class Player
     /**
      * @return Player
      */
-    public function getNext() : Player
+    public function getNext() : ?Player
     {
         return $this->next;
     }

@@ -7,6 +7,17 @@ class Tile
     private $ends = [];
 
     /**
+     * @param array $nums
+     */
+    public function __construct(array $nums)
+    {
+        $ends[0] = $nums[0];
+        $ends[1] = $nums[1];
+
+        $this->ends = $ends;
+    }
+
+    /**
      * @return array
      */
     public function getEnds() : array

@@ -7,14 +7,14 @@ namespace Dominoes\Resources;
 class PlayersGroup
 {
     /**
-     * Player $first
+     * Player $firstPlayer
      */
-    private $first;
+    private $firstPlayer;
 
     /**
-     * Player $head
+     * Player $curPlayer
      */
-    private $head;
+    private $curPlayer;
 
     /**
      * array $names
@@ -38,6 +38,7 @@ class PlayersGroup
     }
 
     /**
+     * Generates all the players in the group and lines them up.
      * 
      */
     private function generatePlayers() : void
@@ -50,8 +51,8 @@ class PlayersGroup
         $firstPlayer = new Player();
         $firstPlayer->setName($firstName);
 
-        $this->first = $firstPlayer;
-        $this->head = $this->first;
+        $this->firstPlayer = $firstPlayer;
+        $this->curPlayer = $this->firstPlayer;
 
         for ($i=1; $i < count($indexes); $i++) {
             $curIndex = $indexes[$i];
@@ -60,12 +61,10 @@ class PlayersGroup
             $curPlayer = new Player();
             $curPlayer->setName($curName);
             
-            $this->head->setNext($curPlayer);
+            $this->curPlayer->setNext($curPlayer);
 
-            $this->head = $this->head->getNext();
+            $this->curPlayer = $this->curPlayer->getNext();
         }
-
-        print_r($this->first->getName());
     }
 
     /**
@@ -107,5 +106,23 @@ class PlayersGroup
     {
         // TODO validate here
         $this->availablePlayerNames = $availablePlayerNames;
+    }
+
+    /**
+     * Returns with the next player in the round
+     * 
+     * @return Player
+     */
+    public function getNextPlayer() : Player
+    {
+        $next = $this->curPlayer->getNext();
+        
+        if (isset($next)) {
+            $this->curPlayer = $next;
+        } else {
+            $this->curPlayer = $this->firstPlayer;
+        }
+
+        return $this->curPlayer;
     }
 }
