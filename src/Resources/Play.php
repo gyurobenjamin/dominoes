@@ -2,6 +2,7 @@
 namespace Dominoes\Resources;
 
 use Dominoes\Config;
+use Dominoes\Printer\Cli;
 
 /**
  * Play represents a single play.
@@ -70,6 +71,13 @@ class Play
 	private function initLine() : void
 	{
         $firstTile = $this->stock->drawATile();
-        $this->line = new Line($firstTile);
+
+        $line = new Line($firstTile);
+
+        $line->placeTile($firstTile);
+
+        $this->line = $line;
+
+        Cli::start($firstTile->toString());
     }
 }

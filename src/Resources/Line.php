@@ -17,10 +17,19 @@ class Line
     private $head;
 
     /**
-     * 
+     * @param Tile $tile
      */
-    public function __construct(Tile $first) {
-        $this->first = $first;
-        $this->head = $first;
+    public function placeTile(Tile $tile) : void
+    {
+        // empty line
+        if (!isset($this->first)) {
+            $ends = $tile->getEnds();
+
+            // place the tile, direction doesn't matter
+            $tile->placeTile($ends[0], $ends[1]);
+
+            $this->first = $tile;
+            $this->head = $tile;
+        }
     }
 }

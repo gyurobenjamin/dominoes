@@ -1,7 +1,7 @@
 <?php
 namespace Dominoes\Printer;
 
-class Printer implements PrinterInterface
+class Cli implements PrinterInterface
 {
     /**
      * @param string $s string to print
