@@ -54,6 +54,25 @@ Composer needs to generate autoload before run:
 composer dump-autoload
 ```
 
+## How to use
+Simple PHP use
+```php
+use Dominoes\Game;
+
+$game = new Game();
+$game->run();
+```
+
+Custom PHP use
+```php
+use Dominoes\Game;
+
+$game = new Game([
+    "numOfPlayers" => 4,
+    "names" => ["Alice", "Bob", "Kaia", "Rosa"]
+]);
+```
+
 ## How to run
 Running the app with a single command in the root folder (See "***Set up project locally***" part first):
 ```bash
