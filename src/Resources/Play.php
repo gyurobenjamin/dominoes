@@ -69,7 +69,7 @@ class Play
     /**
      * Doing next step(s) until the end of the game
      */
-    private function nextTilEnd() : void
+    private function nextTilEnd($noTileFound = 0) : void
     {
         $stock          = $this->stock; // Stock
         $line           = $this->line;
@@ -91,7 +91,7 @@ class Play
             $newTile = $stock->drawATile();
             if ($newTile) {
                 $curPlayer->receiveTile($newTile);
-
+                
                 Cli::draw(
                     $curPlayer->getName(),
                     $newTile->toString(),
@@ -131,6 +131,17 @@ class Play
             }
         }
 
+        // Still no tile means play is equal.
+        if ($tile === null) {
+            $noTileFound++;
+            
+            // Round...
+            if ($noTileFound > $playerGroup->getNumOfPlayers()) {
+                Cli::end();
+                return;
+            }
+        };
+
         // Print line (board) status
         Cli::line($this->line->toStringArray());
 
@@ -143,7 +154,7 @@ class Play
         }
 
         // keep doing
-        $this->nextTilEnd();
+        $this->nextTilEnd($noTileFound);
     }
 
     /**

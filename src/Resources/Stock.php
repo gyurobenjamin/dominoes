@@ -34,7 +34,7 @@ class Stock
         $minNum = 0;
         $maxNum = 6;
         for ($i=$minNum; $i <= $maxNum; $i++) { 
-            for ($j=$minNum; $j <= $maxNum; $j++) { 
+            for ($j=$i; $j <= $maxNum; $j++) { 
                 $this->tiles[] = new Tile([$i, $j]);
             }
         }

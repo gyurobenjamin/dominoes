@@ -37,16 +37,15 @@ class Line
     {
         $ends       = $tile->getEnds();
         $firstNum   = $this->getFirstNum();
-        $head       = $this->head;
         $first      = $this->first;
 
         if ($ends[0] === $firstNum) {
-            $tile->placeTile($ends[0], $ends[1]);
+            $tile->placeTile($ends[1], $ends[0]);
 
         }
 
         if ($ends[1] === $firstNum) {
-            $tile->placeTile($ends[1], $ends[0]);
+            $tile->placeTile($ends[0], $ends[1]);
         }
 
         if($tile->isPlaced()) {

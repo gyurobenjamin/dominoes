@@ -109,6 +109,7 @@ class Player
         $found      = false;
         $endOfLine  = true;
 
+        // Check all tiles
         for ($i=0; $i < $this->getNumOfTiles(); $i++) {
             $ends = $tiles[$i]->getEnds();
 
