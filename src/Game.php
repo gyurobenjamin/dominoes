@@ -25,23 +25,4 @@ class Game
     {
 		$this->play->run();
 	}
-
-	/**
-	 * Return true if the current player is out of tiles
-	 * 
-	 * @param Player $currentPlayer
-	 * @return bool
-	 */
-	private function checkEnd(Player $currentPlayer) : bool
-	{
-		$tiles = $currentPlayer->getTiles();
-
-		// Player still has tiles, game continues
-		if (count($tiles) > 0) {
-			return false;
-		}
-
-		// Player has no tiles, winner found
-		return true;
-	}
 }

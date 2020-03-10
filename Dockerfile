@@ -9,4 +9,6 @@ RUN curl -sS https://getcomposer.org/installer | php \
         && ln -s /usr/local/bin/composer.phar /usr/local/bin/composer
 RUN composer dump-autoload
 
+RUN ./vendor/bin/phpunit tests
+
 CMD [ "php", "./run" ]

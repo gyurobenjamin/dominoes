@@ -87,6 +87,12 @@ docker build -t dominoes .
 docker run dominoes
 ```
 
+## Run test
+Locally run from the terminal (docker already includes):
+```bash
+./vendor/bin/phpunit tests
+```
+
 ## Structure
 
     .
