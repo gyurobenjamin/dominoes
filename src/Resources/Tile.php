@@ -80,6 +80,14 @@ class Tile
     }
 
     /**
+     * @return int
+     */
+    public function getLeftNum() : int
+    {
+        return $this->leftNum;
+    }
+
+    /**
      * Tells the tile been placed in the line or not
      * 
      * @return bool

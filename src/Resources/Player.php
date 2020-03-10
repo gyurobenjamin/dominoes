@@ -98,21 +98,43 @@ class Player
     }
 
     /**
+     * @param int $firstNum current first number in the line
      * @param int $lastNum current last number in the line
      */
-    public function pickTile(int $lastNum) : ?Tile
+    public function pickTile(int $firstNum, int $lastNum) : array
     {
-        $tiles = $this->tiles;
-        $newTiles = [];
-        $ret = null;
+        $tiles      = $this->tiles;
+        $newTiles   = [];
+        $ret        = null;
+        $found      = false;
+        $endOfLine  = true;
 
         for ($i=0; $i < $this->getNumOfTiles(); $i++) {
             $ends = $tiles[$i]->getEnds();
+
+            // Joining possibility to the end
             if (
-                $ends[0] === $lastNum
-                || $ends[1] === $lastNum
+                $ret === null
+                && (
+                    $ends[0] === $lastNum
+                    || $ends[1] === $lastNum
+                )
             ) {
                 $ret = $tiles[$i];
+                $endOfLine = true;
+                continue;
+            }
+
+            // Joining possibility to the front
+            if (
+                $ret === null
+                && (
+                    $ends[0] === $firstNum
+                    || $ends[1] === $firstNum
+                )
+            ) {
+                $ret = $tiles[$i];
+                $endOfLine = false;
                 continue;
             }
 
@@ -121,6 +143,9 @@ class Player
 
         $this->tiles = $newTiles;
 
-        return $ret;
+        return [
+            $ret,
+            $endOfLine
+        ];
     }
 }

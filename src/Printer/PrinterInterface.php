@@ -30,9 +30,4 @@ interface PrinterInterface
      * Print the final message with the winner
      */
     static function win(string $name) : void;
-
-    /**
-     * Print the final equal message
-     */
-    static function end() : void;
 }

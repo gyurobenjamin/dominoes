@@ -20,35 +20,81 @@ class Line
      * @param Tile $tile
      * @return bool success to place or not
      */
-    public function placeTile(Tile $tile) : bool
+    public function placeTile(Tile $tile, bool $end = true) : bool
     {
-        $ends = $tile->getEnds();
+        if (!$end) {
+            return $this->joinTileToFront($tile);
+        }
+        
+        return $this->joinTileToEnd($tile);
+    }
+    
+    /**
+     * @param Tile $tile
+     * @return bool
+     */
+    private function joinTileToFront(Tile $tile) : bool
+    {
+        $ends       = $tile->getEnds();
+        $firstNum   = $this->getFirstNum();
+        $head       = $this->head;
+        $first      = $this->first;
 
+        if ($ends[0] === $firstNum) {
+            $tile->placeTile($ends[0], $ends[1]);
+
+        }
+
+        if ($ends[1] === $firstNum) {
+            $tile->placeTile($ends[1], $ends[0]);
+        }
+
+        if($tile->isPlaced()) {
+            $tile->setNext($first);
+
+            $this->first = $tile;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param Tile $tile
+     * @return bool
+     */
+    private function joinTileToEnd(Tile $tile) : bool
+    {
+        $ends     = $tile->getEnds();
+        $lastNum  = $this->getLastNum();
+        $head     = $this->head;
+        
         // empty line
         if (!isset($this->first)) {
             // place the tile, direction doesn't matter
             $tile->placeTile($ends[0], $ends[1]);
 
             $this->first = $tile;
-            $this->head = $tile;
+            $this->head  = $tile;
 
             return true;
         }
 
-        if ($ends[0] === $this->getLastNum()) {
+        if ($ends[0] === $lastNum) {
             $tile->placeTile($ends[0], $ends[1]);
 
         }
 
-        if ($ends[1] === $this->getLastNum()) {
+        if ($ends[1] === $lastNum) {
             $tile->placeTile($ends[1], $ends[0]);
         }
 
-
         if($tile->isPlaced()) {
-            $head = $this->head;
             $head->setNext($tile);
+
             $this->head = $head->getNext();
+
             return true;
         }
 
@@ -58,9 +104,25 @@ class Line
     /**
      * @return int
      */
-    public function getLastNum() : int
+    public function getFirstNum() : int
     {
-        return $this->head->getRightNum();
+        return $this->first ? $this->first->getLeftNum() : null;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLastNum() : ?int
+    {
+        return isset($this->head) ? $this->head->getRightNum() : null;
+    }
+
+    /**
+     * @return Tile
+     */
+    public function getFirstTile() : Tile
+    {
+        return $this->first;
     }
 
     /**

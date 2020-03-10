@@ -84,14 +84,4 @@ class Cli implements PrinterInterface
         self::newLine();
         self::newLine();
     }
-    
-    /**
-	 */
-	static function end() : void
-	{
-        $msg = "Not possible to finish the game!";
-        self::print($msg);
-        self::newLine();
-        self::newLine();
-	}
 }

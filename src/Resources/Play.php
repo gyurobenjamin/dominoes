@@ -71,14 +71,18 @@ class Play
      */
     private function nextTilEnd() : void
     {
-        $lastNum = $this->line->getLastNum(); // Joining data to the line
-        $stock = $this->stock; // Stock
+        $stock          = $this->stock; // Stock
+        $line           = $this->line;
+        $playerGroup    = $this->playersGroup;
+
+        $lastNum        = $line->getLastNum(); // Joining data to the line
+        $firstNum       = $line->getFirstNum();
 
         // Set the cur player to the next
-        $curPlayer = $this->playersGroup->nextPlayer();
+        $curPlayer = $playerGroup->nextPlayer();
 
         // Player tries to place a tile
-        $tile = $curPlayer->pickTile($lastNum);
+        [$tile, $endOfLine] = $curPlayer->pickTile($firstNum, $lastNum);
         
         // Draw tile until not found a useful one OR stock is not empty
         while ($tile === null && $stock->getNumOfTiles() > 0) {
@@ -87,6 +91,7 @@ class Play
             $newTile = $stock->drawATile();
             if ($newTile) {
                 $curPlayer->receiveTile($newTile);
+
                 Cli::draw(
                     $curPlayer->getName(),
                     $newTile->toString(),
@@ -95,26 +100,36 @@ class Play
             }
 
             // Try to place a tile again
-            $tile = $curPlayer->pickTile($lastNum);
+            [$tile, $endOfLine] = $curPlayer->pickTile($firstNum, $lastNum);
         }
         
-        $lastTile = $this->line->getLastTile();
-        // Place the picked tile into the line
-        if ($tile !== null && $this->line->placeTile($tile)) {
-            Cli::play(
-                $curPlayer->getName(),
-                $tile->toString(),
-                $lastTile->toString(),
-            );
-        } elseif($tile !== null) {
-            throw new \Exception("Tile can't be placed");
-        }
+        if ($endOfLine) {
+            $lastTile = $line->getLastTile();
 
-        // Still no tile means play is equal.
-        if ($tile === null) {
-            Cli::end();
-            return;
-        };
+            // Place the picked tile into the line
+            if ($tile !== null && $line->placeTile($tile, $endOfLine)) {
+                Cli::play(
+                    $curPlayer->getName(),
+                    $tile->toString(),
+                    $lastTile->toString(),
+                );
+            } elseif($tile !== null) {
+                throw new \Exception("Tile can't be placed");
+            }
+        } else {
+            $firstTile = $line->getFirstTile();
+
+            // Place the picked tile into the line
+            if ($tile !== null && $line->placeTile($tile, $endOfLine)) {
+                Cli::play(
+                    $curPlayer->getName(),
+                    $tile->toString(),
+                    $firstTile->toString(),
+                );
+            } elseif($tile !== null) {
+                throw new \Exception("Tile can't be placed");
+            }
+        }
 
         // Print line (board) status
         Cli::line($this->line->toStringArray());
